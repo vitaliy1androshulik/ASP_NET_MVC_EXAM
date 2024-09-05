@@ -1,0 +1,40 @@
+﻿@using _03_SecondHomeWorkViewModel.Entities
+@model List<Mercedes>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>
+        Learn about <a href="https://learn.microsoft.com/aspnet/core">
+            building Web apps with ASP.NET Core
+        </a>.
+    </p>
+
+    @if (DateTime.Now.Minute % 2 == 0)
+    {
+        <p>Current minute is <span class="badge bg-info text-dark">even!</span></p>
+    }
+    else
+    {
+        <p>Current minute is <span class="badge bg-warning text-dark">odd!</span></p>
+    }
+</div>
+
+<div class="row row-cols-4 g-3">
+    @foreach (var i in Model)
+    {
+        <div class="col">
+            <div class="card text-center" style="width: 18rem;">
+                <img height="170" src="@i.ImgUrl" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-controller="Mercedes" asp-action="Details" asp-route-id="@i.Id">
+                            @i.Model
+                        </a>
+                    </h5>
+                    <p class="card-text">@i.Price$ - @i.HorsePower</p>
+                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@i.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

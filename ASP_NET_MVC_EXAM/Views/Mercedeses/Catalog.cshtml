@@ -1,0 +1,83 @@
+﻿@model List<MercedesDto>
+
+<h1>Products List</h1>
+<p>You can manage the products here.</p>
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    <i class="bi bi-plus-lg"></i>
+    Add New Product
+</a>
+
+<table class="table product-table">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">#</th>
+            <th class="text-center" scope="col">Brand</th>
+            <th scope="col">Model</th>
+            <th scope="col">Class</th>
+            <th scope="col">Power</th>
+            <th scope="col">Year</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr class="align-middle">
+                <th scope="row">@i.Id</th>
+                <td class="text-center">
+                    <img height="40" src="@i.ImgUrl" alt="@i.BrandOfCar" />
+                </td>
+                <td>
+                    <span>@i.Model</span>
+                    @if(i.Discount > 0)
+                    {
+                        <span class="badge bg-primary">SALE</span>
+                    }
+                </td>
+                <td>
+                    @if(i.Discount > 0)
+                    {
+                        <span>@(i.Price - (i.Price / 100 * i.Discount))$</span>
+                        <del>@i.Price$</del>
+                    }
+                    else
+                    {
+                        <span>@i.Price$</span>
+                    }
+                </td>
+                <td>@(i.Class ?? "not loaded")</td>
+                <td>
+                    @i.Year
+                </td>
+                <td>@i.Discount%</td>
+                <td>
+                    @if (i.Discount > 0)
+                    {
+                        <span>@(i.Price - (i.Price / 100 * i.Discount))$</span>
+                        <del>@i.Price$</del>
+                    }
+                    else
+                    {
+                        <span>@i.Price$</span>
+                    }
+                </td>
+                <td>
+                    <a class ="btn btn-outline-secondary" asp-controller="Mercedes" asp-action="Details" asp-route-id="@i.Id">
+                        <i class="bi bi-info-square-fill"></i>
+                    </a>
+                    <a class="btn btn-outline-warning" asp-controller="Mercedes" asp-action="Edit" asp-route-id="@i.Id">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <a class="btn btn-outline-danger" asp-controller="Mercedes" asp-action="Delete" asp-route-id="@i.Id">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Count: @Model.Count</p>

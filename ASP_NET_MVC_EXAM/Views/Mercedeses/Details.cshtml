@@ -1,0 +1,12 @@
+﻿@model MercedesDto
+
+<div class="text-center">
+    <h1>@Model.Model</h1>
+
+    <img src="@Model.ImgUrl" height="300" />
+
+    <p>Price: @Model.Price$</p>
+
+    <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Cart</a>
+</div>
+
