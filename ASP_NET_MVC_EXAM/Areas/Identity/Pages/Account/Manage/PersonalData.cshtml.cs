@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace ShopMvcApp_PD211.Areas.Identity.Pages.Account.Manage
+namespace ASP_NET_MVC_EXAM.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {

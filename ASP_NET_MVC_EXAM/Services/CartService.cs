@@ -5,9 +5,9 @@ using Core.Services;
 using Data;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using ShopMvcApp_PD211.Extensions;
+using ASP_NET_MVC_EXAM.Extensions;
 
-namespace ShopMvcApp_PD211.Services
+namespace ASP_NET_MVC_EXAM.Services
 {
     public class CartService : ICartService
     {
@@ -25,9 +25,7 @@ namespace ShopMvcApp_PD211.Services
         public List<MercedesDto> GetProducts()
         {
             var ids = httpContext.Session.Get<List<int>>("cart_items") ?? new();
-
             var products = context.Mercedeses.Include(x => x.BrandOfCar).Where(x => ids.Contains(x.Id)).ToList();
-
             return mapper.Map<List<MercedesDto>>(products);
         }
 
@@ -40,10 +38,7 @@ namespace ShopMvcApp_PD211.Services
 
         public int GetCount()
         {
-            // зчитуємо наявні елементи в корзині
             var ids = httpContext.Session.Get<List<int>>("cart_items");
-
-            // якщо елементів немає, тоді створюємо порожній список
             if (ids == null) return 0;
 
             return ids.Count;
@@ -51,30 +46,17 @@ namespace ShopMvcApp_PD211.Services
 
         public void Add(int id)
         {
-            // зчитуємо наявні елементи в корзині
             var ids = httpContext.Session.Get<List<int>>("cart_items");
-
-            // якщо елементів немає, тоді створюємо порожній список
             if (ids == null) ids = new();
-            // додаємо новий елемент
             ids.Add(id);
-
-            // зберігаємо оновлений список корзини в cookies
             httpContext.Session.Set("cart_items", ids);
         }
 
         public void Remove(int id)
         {
-            // зчитуємо наявні елементи в корзині
             var ids = httpContext.Session.Get<List<int>>("cart_items");
-
-            // якщо елементів немає, тоді створюємо порожній список
             if (ids == null) return; // TODO: throw exception
-
-            // додаємо новий елемент
             ids.Remove(id);
-
-            // зберігаємо оновлений список корзини в cookies
             httpContext.Session.Set("cart_items", ids);
         }
 

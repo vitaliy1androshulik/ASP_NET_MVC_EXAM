@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace ShopMvcApp_PD211.Extensions
+namespace ASP_NET_MVC_EXAM.Extensions
 {
     public static class SessionExtensions
     {

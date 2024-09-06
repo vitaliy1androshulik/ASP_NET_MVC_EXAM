@@ -2,7 +2,7 @@
 @{
     var create = ViewBag.CreateMode;
 }
-<h1>@(create ? "Create" : "Edit") Product Form</h1>
+<h1>@(create ? "Create" : "Edit") Car Form</h1>
 
 @if(!create)
 {
@@ -18,15 +18,15 @@
     </div>
 
     <div class="col-10">
-        <label asp-for=Model class="form-label">Title</label>
-        <input asp-for=Model type="text" class="form-control" placeholder="Enter product title">
+        <label asp-for=Model class="form-label">Model</label>
+        <input asp-for=Model type="text" class="form-control" placeholder="Enter car model">
         <span class="small text-danger" asp-validation-for="Model"></span>
     </div>
 
     <div class="col-md-5">
         <label asp-for=Price class="form-label">Price</label>
         <div class="input-group">
-            <input required asp-for=Price type="number" min="0" step="0.01" class="form-control" placeholder="Enter product price">
+            <input required asp-for=Price type="number" min="0" step="0.01" class="form-control" placeholder="Enter car price">
             <span class="input-group-text">$</span>
         </div>
         <span class="small text-danger" asp-validation-for="Price"></span>
@@ -34,7 +34,7 @@
     <div class="col-md-4">
         <label asp-for=Discount class="form-label">Discount</label>
         <div class="input-group">
-            <input value="0" asp-for=Discount type="number" min="0" max="100" class="form-control" placeholder="Enter product discount">
+            <input value="0" asp-for=Discount type="number" min="0" max="100" class="form-control" placeholder="Enter car discount">
             <span class="input-group-text">%</span>
         </div>
         <span class="small text-danger" asp-validation-for="Discount"></span>
@@ -46,11 +46,11 @@
     </div>
 
     <div class="col-md-6">
-        <label asp-for=Year class="form-label">Category</label>
-        <select asp-for=Year asp-items=@ViewBag.Categories class="form-select">
-            <option disabled selected>Choose product category...</option>
+        <label asp-for=BrandOfCarId class="form-label">Brand of Car</label>
+        <select asp-for=BrandOfCarId asp-items=@ViewBag.Brands class="form-select">
+            <option disabled selected>Choose car brand...</option>
         </select>
-        <span class="small text-danger" asp-validation-for="Year"></span>
+        <span class="small text-danger" asp-validation-for="BrandOfCar"></span>
     </div>
 
     @* <div class="col-6">
@@ -66,13 +66,17 @@
     </div>
 
     <div class="col-12 mb-3">
-        <label asp-for=Class class="form-label">Description</label>
-        <textarea asp-for=Class class="form-control" rows="3" placeholder="Enter product description"></textarea>
+        <label asp-for=Year class="form-label">Year</label>
+        <textarea asp-for=Year class="form-control" rows="3" placeholder="Enter car Year"></textarea>
+        <span class="small text-danger" asp-validation-for="Year"></span>
+    </div>
+    <div class="col-12 mb-3">
+        <label asp-for=Class class="form-label">Class</label>
+        <textarea asp-for=Class class="form-control" rows="3" placeholder="Enter car Class"></textarea>
         <span class="small text-danger" asp-validation-for="Class"></span>
     </div>
-
     <div class="col-md-6">
-        <a asp-action="Index" class="btn btn-dark w-100">
+        <a asp-action="Catalog" class="btn btn-dark w-100">
             <i class="bi bi-arrow-left"></i>
             Back
         </a>

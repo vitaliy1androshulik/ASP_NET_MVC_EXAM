@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 
-namespace ShopMvcApp_PD211.Extensions
+namespace ASP_NET_MVC_EXAM.Extensions
 {
     public static class Roles
     {
@@ -33,8 +33,8 @@ namespace ShopMvcApp_PD211.Extensions
         {
             var userManager = app.GetRequiredService<UserManager<User>>();
 
-            const string USERNAME = "admin@ukr.net";
-            const string PASSWORD = "Qwer-1234";
+            const string USERNAME = "admin@gmail.com";
+            const string PASSWORD = "admin";
 
             var existingUser = await userManager.FindByNameAsync(USERNAME);
 

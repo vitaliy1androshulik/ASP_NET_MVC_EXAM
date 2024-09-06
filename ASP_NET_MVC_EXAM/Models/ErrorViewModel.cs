@@ -1,4 +1,4 @@
-namespace ShopMvcApp_PD211.Models
+namespace ASP_NET_MVC_EXAM.Models
 {
     public class ErrorViewModel
     {

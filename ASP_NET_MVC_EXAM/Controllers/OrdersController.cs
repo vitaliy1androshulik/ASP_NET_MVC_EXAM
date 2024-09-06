@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace ShopMvcApp_PD211.Controllers
+namespace ASP_NET_MVC_EXAM.Controllers
 {
     [Authorize]
     public class OrdersController : Controller

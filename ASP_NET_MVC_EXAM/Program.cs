@@ -4,16 +4,16 @@ using Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using ShopMvcApp_PD211.Services;
+using ASP_NET_MVC_EXAM.Services;
 using Microsoft.AspNetCore.Identity;
 using Data.Entities;
 using Core.Interfaces;
-using ShopMvcApp_PD211.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using ASP_NET_MVC_EXAM.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-string connectionString = builder.Configuration.GetConnectionString("LocalDb")!;
+string connectionString = builder.Configuration.GetConnectionString("SomeeDataBase")!;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -23,6 +23,7 @@ builder.Services.AddDbContext<CatalogDbContext>(opt => opt.UseSqlServer(connecti
 
 builder.Services.AddIdentity<User, IdentityRole>(options => 
     options.SignIn.RequireConfirmedAccount = false)
+    .AddDefaultUI()
     .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<CatalogDbContext>();
 
@@ -48,7 +49,6 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IFileService, FileService>();
-builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IViewRender, ViewRender>();
 
 var app = builder.Build();

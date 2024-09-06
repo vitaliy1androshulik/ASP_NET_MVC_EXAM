@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data;
-using ShopMvcApp_PD211.Models;
+using ASP_NET_MVC_EXAM.Models;
 using System.Diagnostics;
 
-namespace ShopMvcApp_PD211.Controllers
+namespace ASP_NET_MVC_EXAM.Controllers
 {
     public class HomeController : Controller
     {
@@ -22,7 +22,7 @@ namespace ShopMvcApp_PD211.Controllers
                 .Include(x => x.BrandOfCar) // LEFT JOIN
                 .ToList();
 
-            return View(products); // search for view in: ~/Views/Home/Index
+            return View(products); 
         }
 
         public IActionResult Privacy()
@@ -32,7 +32,6 @@ namespace ShopMvcApp_PD211.Controllers
 
         public IActionResult About()
         {
-            // your logic...
             return View();
         }
 

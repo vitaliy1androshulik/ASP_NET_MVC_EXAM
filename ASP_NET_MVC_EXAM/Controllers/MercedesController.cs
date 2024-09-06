@@ -6,10 +6,10 @@ using Data;
 using Core.Dtos;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using ShopMvcApp_PD211.Extensions;
+using ASP_NET_MVC_EXAM.Extensions;
 using _03_SecondHomeWorkViewModel.Entities;
 
-namespace ShopMvcApp_PD211.Controllers
+namespace ASP_NET_MVC_EXAM.Controllers
 {
     public class MercedesController : Controller
     {
@@ -35,11 +35,11 @@ namespace ShopMvcApp_PD211.Controllers
 
         public IActionResult Details(int id)
         {
-            var product = context.Mercedeses.Find(id);
+            var mercedes = context.Mercedeses.Find(id);
 
-            if (product == null) return NotFound();
+            if (mercedes == null) return NotFound();
 
-            return View(mapper.Map<MercedesDto>(product));
+            return View(mapper.Map<MercedesDto>(mercedes));
         }
 
         // GET - open create page
@@ -61,21 +61,6 @@ namespace ShopMvcApp_PD211.Controllers
                 ViewBag.CreateMode = true;
                 return View("Upsert", model2);
             }
-
-            // 1 - manual mapping
-            //var entity = new Product
-            //{
-            //    Title = model2.Title,
-            //    CategoryId = model2.CategoryId,
-            //    Description = model2.Description,
-            //    Discount = model2.Discount,
-            //    ImageUrl = model2.ImageUrl,
-            //    Price = model2.Price,
-            //    Quantity = model2.Quantity
-            //};
-            // 2 - using auto mapper
-
-            // save image and get file path
             if (model2.Image != null)
                 model2.ImgUrl = await fileService.SaveProductImage(model2.Image);
 
@@ -84,19 +69,19 @@ namespace ShopMvcApp_PD211.Controllers
             context.Mercedeses.Add(entity);
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Catalog");
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var product = context.Mercedeses.Find(id);
+            var mercedes = context.Mercedeses.Find(id);
 
-            if (product == null) return NotFound();
+            if (mercedes == null) return NotFound();
 
             LoadBrands();
             ViewBag.CreateMode = false;
-            return View("Upsert", mapper.Map<MercedesDto>(product));
+            return View("Upsert", mapper.Map<MercedesDto>(mercedes));
         }
 
         [HttpPost]
@@ -115,28 +100,27 @@ namespace ShopMvcApp_PD211.Controllers
             context.Mercedeses.Update(mapper.Map<Mercedes>(model2));
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Catalog");
         }
 
-        [Authorize(Roles = Roles.ADMIN)]
+        [Authorize]
         public IActionResult Delete(int id)
         {
-            var product = context.Mercedeses.Find(id);
+            var mercedes = context.Mercedeses.Find(id);
 
-            if (product == null) return NotFound(); // 404
+            if (mercedes == null) return NotFound();
 
-            if (product.ImgUrl != null) 
-                fileService.DeleteProductImage(product.ImgUrl);
+            if (mercedes.ImgUrl != null) 
+                fileService.DeleteProductImage(mercedes.ImgUrl);
 
-            context.Mercedeses.Remove(product);
+            context.Mercedeses.Remove(mercedes);
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Catalog");
         }
 
         private void LoadBrands()
         {
-            // ViewBag - collection of properties that is accessible in View
             ViewBag.Brands = new SelectList(context.BrandOfCars.ToList(), "Id", "Name");
         }
     }
